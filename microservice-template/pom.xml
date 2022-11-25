@@ -8,11 +8,11 @@
         <version>3.0.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.template</groupId>
-    <artifactId>microservtemplate</artifactId>
+    <groupId>com.quicktutorials.learnmicroservices</groupId>
+    <artifactId>AccountMicroserviceApplication</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>learnmicroservices</name>
-    <description>learnmicroservices</description>
+    <name>AccountMicroservice</name>
+    <description>First Microservice in SpringBoot</description>
     <properties>
         <java.version>17</java.version>
     </properties>
