@@ -11,8 +11,8 @@
     <groupId>com.template</groupId>
     <artifactId>microservtemplate</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>microservtemplate</name>
-    <description>microservtemplate</description>
+    <name>learnmicroservices</name>
+    <description>learnmicroservices</description>
     <properties>
         <java.version>17</java.version>
     </properties>

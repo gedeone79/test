@@ -1,13 +1,13 @@
-package com.template.microservtemplate;
+package com.quicktutorials.learnmicroservices;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MicroservtemplateApplication {
+public class AccountMicroserviceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MicroservtemplateApplication.class, args);
+        SpringApplication.run(AccountMicroserviceApplication.class, args);
     }
 
 }
