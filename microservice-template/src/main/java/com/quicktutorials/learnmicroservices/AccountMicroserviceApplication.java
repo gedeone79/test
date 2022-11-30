@@ -9,7 +9,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class AccountMicroserviceApplication implements CommandLineRunner {
-
     private static final Logger log = LoggerFactory.getLogger(AccountMicroserviceApplication.class);
 
     public static void main(String[] args) {
