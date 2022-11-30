@@ -20,5 +20,7 @@ public class AccountMicroserviceApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         log.debug("*** START APPLICATION");
+        log.debug("*** STOP APPLICATION");
+
     }
 }
