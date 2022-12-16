@@ -1,18 +1,31 @@
 package com.quicktutorials.learnmicroservices.controllers;
 
 
+import com.quicktutorials.learnmicroservices.entities.Operation;
 import com.quicktutorials.learnmicroservices.entities.User;
+import com.quicktutorials.learnmicroservices.services.LoginService;
+import com.quicktutorials.learnmicroservices.services.OperationService;
+import com.quicktutorials.learnmicroservices.utils.UserNotLoggedException;
+import io.jsonwebtoken.ExpiredJwtException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
+import java.util.Date;
+import java.util.Map;
+import java.util.Optional;
 
 @org.springframework.web.bind.annotation.RestController
 public class RestController {
@@ -20,11 +33,11 @@ public class RestController {
 
     private static final Logger log = LoggerFactory.getLogger(RestController.class);
 
-  /*  @Autowired
+    @Autowired
     LoginService loginService;
 
     @Autowired
-    OperationService operationService;*/
+    OperationService operationService;
 
 
     @RequestMapping("/hello")
@@ -106,18 +119,18 @@ public class RestController {
     /*---------------------------------------------------------*/
 
 
-   /* @CrossOrigin
-    @RequestMapping(value = "/login", method = POST)
-    public ResponseEntity<JsonResponseBody> loginUser(@RequestParam(value ="id") String id, @RequestParam(value="password") String pwd){
+    @CrossOrigin
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public ResponseEntity<JsonResponseBody> loginUser(@RequestParam(value = "id") String id, @RequestParam(value = "password") String pwd) {
         //check if user exists in DB -> if exists generate JWT and send back to client
         try {
             Optional<User> userr = loginService.getUserFromDbAndVerifyPassword(id, pwd);
-            if(userr.isPresent()){
+            if (userr.isPresent()) {
                 User user = userr.get();
                 String jwt = loginService.createJwt(user.getId(), user.getUsername(), user.getPermission(), new Date());
                 return ResponseEntity.status(HttpStatus.OK).header("jwt", jwt).body(new JsonResponseBody(HttpStatus.OK.value(), "Success! User logged in!"));
             }
-        }catch (UserNotLoggedException e1){
+        } catch (UserNotLoggedException e1) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JsonResponseBody(HttpStatus.FORBIDDEN.value(), "Login failed! Wrong credentials" + e1.toString()));
         }catch (UnsupportedEncodingException e2){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JsonResponseBody(HttpStatus.FORBIDDEN.value(), "Token Error" + e2.toString()));
@@ -142,7 +155,7 @@ public class RestController {
         }
     }
 
-    @RequestMapping(value = "/accounts/user", method = POST)
+    @RequestMapping(value = "/accounts/user", method = RequestMethod.POST)
     public ResponseEntity<JsonResponseBody> fetchAllAccountsPerUser(HttpServletRequest request){
         //request -> fetch JWT -> recover User Data -> Get user accounts from DB
         try {
@@ -158,8 +171,7 @@ public class RestController {
     }
 
 
-
-    @RequestMapping(value = "/operations/add", method=POST)
+    @RequestMapping(value = "/operations/add", method = RequestMethod.POST)
     public ResponseEntity<JsonResponseBody> addOperation(HttpServletRequest request, @Valid Operation operation, BindingResult bindingResult){
         //request -> fetch JWT -> recover User Data -> Save valid operation in DB
         if(bindingResult.hasErrors()){
@@ -176,8 +188,6 @@ public class RestController {
             return ResponseEntity.status(HttpStatus.GATEWAY_TIMEOUT).body(new JsonResponseBody(HttpStatus.GATEWAY_TIMEOUT.value(), "Session Expired!: " + e3.toString()));
         }
     }
-
-*/
 
 
 }
