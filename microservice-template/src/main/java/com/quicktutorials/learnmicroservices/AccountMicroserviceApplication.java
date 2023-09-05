@@ -45,7 +45,7 @@ public class AccountMicroserviceApplication implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
         //...
-        log.info("Hello 1");
+        log.info("Hello 00");
 
         String encryptedPwd = encryptionUtils.encrypt("Abba");
         System.out.println("Ecripted pwd into DB: " + encryptedPwd);
