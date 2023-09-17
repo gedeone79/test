@@ -26,6 +26,8 @@ public class AccountMicroserviceApplication implements CommandLineRunner {
     @Autowired
     UserDao userDao;
 
+
+
     @Autowired
     AccountDao accountDao;
 
